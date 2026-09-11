@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="plagiarism/smartdetector/db" VERSION="20260910" COMMENT="XMLDB file for Moodle plagiarism_smartdetector"
+    xmlns:xsi="http://www.w3.org/2000/svg"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="plagiarism_smartdetector_res" COMMENT="Stores plagiarism and AI detection scores for assignment submissions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID from assign_submission table"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID of the student"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course Module ID"/>
+        <FIELD NAME="plagiarism_score" TYPE="number" LENGTH="5" DECIMALS="2" NOTNULL="false" DEFAULT="0.00" COMMENT="Percentage score of plagiarism (0.00 - 100.00)"/>
+        <FIELD NAME="ai_score" TYPE="number" LENGTH="5" DECIMALS="2" NOTNULL="false" DEFAULT="0.00" COMMENT="Percentage score of AI generated text (0.00 - 100.00)"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending" COMMENT="Status processing: pending, processing, completed, failed"/>
+        <FIELD NAME="report_url" TYPE="text" NOTNULL="false" COMMENT="External link to detailed detection report if available"/>
+        <FIELD NAME="error_message" TYPE="text" NOTNULL="false" COMMENT="Error details if status failed"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="submissionid_idx" UNIQUE="true" FIELDS="submissionid"/>
+        <INDEX NAME="userid_idx" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="cmid_idx" UNIQUE="false" FIELDS="cmid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

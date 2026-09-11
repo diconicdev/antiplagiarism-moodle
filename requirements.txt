@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+transformers
+scikit-learn
+pymupdf
+pytesseract
+pillow
